@@ -24,18 +24,6 @@ public class ClientController {
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
-    @GetMapping("lastnames/{lastname}")
-    public ResponseEntity<Client> getClientByLastName(@PathVariable String lastname) {
-        Client client = clientService.findByLastName(lastname);
-        return new ResponseEntity<>(client, HttpStatus.OK);
-    }
-
-    @GetMapping("emails/{email}")
-    public ResponseEntity<Client> getClientByEmail(@PathVariable String email) {
-        Client client = clientService.findByEmail(email);
-        return new ResponseEntity<>(client, HttpStatus.OK);
-    }
-
     @PostMapping("/create")
     public ResponseEntity<Client> createClient(@RequestBody @Validated Client client) {
         Client addedClient = clientService.addClient(client);
