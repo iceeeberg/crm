@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ClientCard from "./ClientCard";
 import { InputGroup, FormControl, Button, Form } from "react-bootstrap";
-import AddClient from "./AddClient";
+import AddModalHandler from "./AddModalHandler";
 
 const Client = () => {
   const api = axios.create({
@@ -56,7 +56,7 @@ const Client = () => {
             onChange={(e) => searchHandler(e.target.value)}
             placeholder="Search Client.."
           />
-          <AddClient/>
+         <AddModalHandler/>
         </Form>
       </InputGroup>
       {search.length > 1

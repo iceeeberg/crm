@@ -25,23 +25,46 @@ const OVERLAY_STYLES = {
   zIndex: 1000,
 };
 
-const AddModal = ({ open, onClose }) => {
+const ClientForm = ({ open, onClose }) => {
 
-  const[client, setClient] = useState([]);
+  const[formData, setFormData] = useState({
+    firstName: '', 
+    lastName: '', 
+    dateJoined: '', 
+    phoneNumber: '',
+    email:'',
+    city: '',
+    goals: '', 
+    description:''
+  })
 
   const api = axios.create({
     baseURL: "http://localhost:8080/clients/"
   });
 
-  const addClientHandler = (e, client) => {
+  const addClientHandler = (e) => {
     e.preventDefault();
-    api.post('/create', client).then(res => {
-      if(res.data != null) {
-        setClient(client);
+    api.post('/create',{
+    firstName: formData.firstName, 
+    lastName: formData.lastName, 
+    dateJoined: formData.dateJoined, 
+    phoneNumber: formData.phoneNumber,
+    email: formData.email,
+    city: formData.city,
+    goals: formData.goals, 
+    description: formData.description
+    }).then(res => {
         alert('Client added successfully!')
-      }
+        window.location.reload();
     })
   } 
+
+  const handleChange = (e) => {
+    const newData = {...formData}
+    newData[e.target.id] = e.target.value
+    setFormData(newData);
+    console.log(newData)
+  }
 
   if (!open) return null;
 
@@ -52,42 +75,44 @@ const AddModal = ({ open, onClose }) => {
       <Form onSubmit={addClientHandler}>
         <Form.Group className="mb-3" >
           <Form.Label>First Name:</Form.Label>
-          <Form.Control type="text" placeholder="First Name" />
+          <Form.Control onChange={handleChange} id="firstName" type="text" placeholder="First Name" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>Last Name:</Form.Label>
-          <Form.Control type="text" placeholder="Last Name" />
+          <Form.Control onChange={handleChange} id="lastName"  type="text" placeholder="Last Name" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>Date Joined:</Form.Label>
-          <Form.Control type="date" placeholder="Date Joined" />
+          <Form.Control onChange={handleChange} id="dateJoined"  type="date" placeholder="Date Joined" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>Phone Number:</Form.Label>
-          <Form.Control type="phone" placeholder="Phone Number" />
+          <Form.Control onChange={handleChange} id="phoneNumber"  type="phone" placeholder="Phone Number" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>E-mail:</Form.Label>
-          <Form.Control type="email" placeholder="E-mail" />
+          <Form.Control onChange={handleChange}
+          id="email"  type="email" placeholder="E-mail" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>City:</Form.Label>
-          <Form.Control type="text" placeholder="City" />
+          <Form.Control onChange={handleChange} 
+          id="city" type="text" placeholder="City" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>Goals:</Form.Label>
-          <Form.Control as="textarea" rows={3} placeholder="Goals" />
+          <Form.Control onChange={handleChange} id="goals"  as="textarea" rows={3} placeholder="Goals" />
         </Form.Group>
 
         <Form.Group className="mb-3" >
           <Form.Label>Description:</Form.Label>
-          <Form.Control as="textarea" rows={3}placeholder="Description" />
+          <Form.Control onChange={handleChange} id="description"  as="textarea" rows={3}placeholder="Description" />
         </Form.Group>
 
         <Button variant="primary" type="submit">
@@ -103,4 +128,4 @@ const AddModal = ({ open, onClose }) => {
   );
 };
 
-export default AddModal;
+export default ClientForm;
