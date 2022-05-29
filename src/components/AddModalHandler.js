@@ -1,8 +1,8 @@
 import { Button} from "react-bootstrap";
-import Modal from './AddModal';
+import Modal from './ClientForm';
 import {useState} from 'react';
 
-const AddClient = () => {
+const AddModalHandler = () => {
 
   const[isOpen, setIsOpen] =  useState(false);
 
@@ -14,4 +14,4 @@ const AddClient = () => {
   );
 };
 
-export default AddClient;
+export default AddModalHandler;

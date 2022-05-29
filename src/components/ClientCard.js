@@ -6,6 +6,7 @@ import {
   Col,
   Button
 } from "react-bootstrap";
+import RemoveHandler from './RemoveHandler';
 
 const ClientCard = ({ clients }) => {
   return (
@@ -26,6 +27,7 @@ const ClientCard = ({ clients }) => {
               <ListGroupItem>{clients.city}</ListGroupItem>
             </ListGroup>
             <Card.Body>
+              <RemoveHandler/>
             </Card.Body>
           </Card>
         </Col>
