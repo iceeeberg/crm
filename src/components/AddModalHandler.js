@@ -1,5 +1,5 @@
 import { Button} from "react-bootstrap";
-import Modal from './ClientForm';
+import AddClient from './AddClient';
 import {useState} from 'react';
 
 const AddModalHandler = () => {
@@ -9,7 +9,7 @@ const AddModalHandler = () => {
   return (
     <div>
       <Button onClick={() => setIsOpen(true)} variant="success">Add A Client+</Button>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+      <AddClient open={isOpen} onClose={() => setIsOpen(false)}></AddClient>
     </div>
   );
 };
