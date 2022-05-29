@@ -1,5 +1,8 @@
 import ReactDom from "react-dom";
 import { Modal, Button } from "react-bootstrap";
+import axios from "axios";
+import {useState} from 'react';
+import Client from './Client';
 
 const MODAL_STYLES = {
   display:"flex",
@@ -24,10 +27,28 @@ const OVERLAY_STYLES = {
 };
 
 const DeleteModal = ({open, onClose}) => {
-  
+
+  const[data, setData] = useState([]);
+  const api = axios.create({
+    baseURL: "http://localhost:8080/clients/"
+  });
+
   const deleteHandler = (id) => {
-    
+    api.get('/all').then((res) => {
+      const clients = []
+      for(const index in res.data){
+        clients.push(
+          id = res.data[index].id
+        )
+      }
+      api.delete(`/delete/${id}`).then(res => {
+        setData(prevData => prevData.filter(client =>client.id !== id))
+        alert('Client has been deleted!')
+        window.location.reload();
+      })
+    })  
   }
+
   
   if (!open) return null;
 
@@ -40,8 +61,8 @@ const DeleteModal = ({open, onClose}) => {
     <Modal.Title>Delete Client?</Modal.Title>
   </Modal.Header>
   <Modal.Footer>
-    <Button onClick={deleteHandler} variant="danger">Yes</Button>
-    <Button onClick={onClose} variant="secondary">No</Button>
+    <Button onClick={deleteHandler} variant="danger">Confirm</Button>
+    <Button onClick={onClose} variant="secondary">Cancel</Button>
   </Modal.Footer>
 </Modal.Dialog>
 </div>

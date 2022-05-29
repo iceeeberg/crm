@@ -4,7 +4,7 @@ import ClientCard from "./ClientCard";
 import { InputGroup, FormControl, Button, Form } from "react-bootstrap";
 import AddModalHandler from "./AddModalHandler";
 
-const Client = () => {
+const Client = ({}) => {
   const api = axios.create({
     baseURL: "http://localhost:8080/clients",
     method: 'GET'
