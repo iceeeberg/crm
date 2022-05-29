@@ -2,21 +2,20 @@ import {
   Card,
   ListGroup,
   ListGroupItem,
-  Container,
   Row,
   Col,
+  Button
 } from "react-bootstrap";
 
 const ClientCard = ({ clients }) => {
-
   return (
-    <Container>
       <Row>
         <Col>
           <Card bg="primary" text="white" style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>
                 {clients.firstName} {clients.lastName}
+                
               </Card.Title>
               <Card.Text>{clients.description}</Card.Text>
               <h5>{clients.goals}</h5>
@@ -26,10 +25,11 @@ const ClientCard = ({ clients }) => {
               <ListGroupItem>{clients.phoneNumber}</ListGroupItem>
               <ListGroupItem>{clients.city}</ListGroupItem>
             </ListGroup>
+            <Card.Body>
+            </Card.Body>
           </Card>
         </Col>
       </Row>
-    </Container>
   );
 };
 
